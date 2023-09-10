@@ -61,6 +61,7 @@ public class Turno
         this.fechaYHora = fechaYHora;
     }
 
+    /*
     @Override
     public String toString() {
         return "Turno{" +
@@ -70,6 +71,7 @@ public class Turno
                 ", fechaYHora=" + fechaYHora +
                 '}';
     }
+     */
 }
 
 

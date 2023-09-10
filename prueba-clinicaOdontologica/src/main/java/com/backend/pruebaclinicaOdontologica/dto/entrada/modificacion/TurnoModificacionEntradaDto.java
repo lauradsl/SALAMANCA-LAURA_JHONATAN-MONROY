@@ -23,7 +23,7 @@ public class TurnoModificacionEntradaDto
 
     @NotNull(message = "Debe ingresar una fecha de ingreso")
     @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime fechaYHora;
 
     public TurnoModificacionEntradaDto() {};

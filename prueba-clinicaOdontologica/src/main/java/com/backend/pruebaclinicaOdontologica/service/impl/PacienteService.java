@@ -90,7 +90,7 @@ public class PacienteService implements IPacienteService
     //se debe mapear tambien el domicilio. AGREGAR AL CONSTRUCTOR
     private void configureMapping()
     {
-        //referencia al metodo. El domicilio de la entreda debe estar en el domicilio de Paciente. Se hace paralelimos entre domicilios
+        //referencia al metodo. El domicilio de la entreda debe estar en el domicilio de Paciente. Se hace paralelismo entre domicilios
         modelMapper.typeMap(PacienteEntradaDto.class, Paciente.class)
         .addMappings(mapper -> mapper.map(PacienteEntradaDto::getDomicilio,Paciente::setDomicilio));
 

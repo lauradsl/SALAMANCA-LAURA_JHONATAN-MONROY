@@ -25,11 +25,11 @@ public class PacienteModificacionEntradaDto {
 
     @NotNull (message = "Debe ingresar un dni")
     @NotBlank (message = "Debe especificar el dni")
-    private String dni;
+    private int dni;
 
     @NotNull (message = "Debe ingresar una fecha de ingreso")
     @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDate fechaIngreso;
 
     @NotNull
@@ -39,7 +39,7 @@ public class PacienteModificacionEntradaDto {
     public PacienteModificacionEntradaDto() {
     }
 
-    public PacienteModificacionEntradaDto(Long id, String nombre, String apellido, String dni, LocalDate fechaIngreso, DomicilioModificacionEntradaDto domicilio) {
+    public PacienteModificacionEntradaDto(Long id, String nombre, String apellido, int dni, LocalDate fechaIngreso, DomicilioModificacionEntradaDto domicilio) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -72,11 +72,11 @@ public class PacienteModificacionEntradaDto {
         this.apellido = apellido;
     }
 
-    public String getDni() {
+    public int getDni() {
         return dni;
     }
 
-    public void setDni(String dni) {
+    public void setDni(int dni) {
         this.dni = dni;
     }
 
