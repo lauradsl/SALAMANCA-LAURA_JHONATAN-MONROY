@@ -27,6 +27,7 @@ public class PacienteController
 
     //POST
     //Definir el metodo. Definir nombre indicativo de endpoint
+    @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PostMapping("registrar")
     public ResponseEntity<PacienteSalidaDto> registarPaciente(@Valid @RequestBody PacienteEntradaDto paciente)
     {

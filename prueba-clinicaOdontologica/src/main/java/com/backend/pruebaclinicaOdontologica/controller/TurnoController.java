@@ -27,6 +27,7 @@ public class TurnoController
     }
 
     //POST REGISTRAR
+    @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PostMapping("/registrar")
     public ResponseEntity<TurnoSalidaDto> registrarTurno(@Valid @RequestBody TurnoEntradaDto turnoEntradaDto) throws BadRequestException
     {
