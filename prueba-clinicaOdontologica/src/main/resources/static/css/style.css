@@ -35,6 +35,13 @@ body div a
     
 }
 
+#mensaje
+{
+    background-color: green;
+    padding: 5px;
+    color: white;
+}
+
 /*---------------------------------REGISTAR ODONTOLOGO-------------------------*/
 
 form {

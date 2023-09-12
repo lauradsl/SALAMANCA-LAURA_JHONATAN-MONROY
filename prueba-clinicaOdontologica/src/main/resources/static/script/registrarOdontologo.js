@@ -16,13 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
             headers: {'Content-Type': 'application/json; charset=UTF-8',},
             body: JSON.stringify({matricula, nombre, apellido}),
         })
-        .then((response) => response.json())
-        .then((data) => {
-            if (!data.ok) {
-                mensaje.innerHTML = "El odontólogo " + data.nombre + " " + data.apellido + " se ha registrado exitosamente.";
-            } else {
-                mensaje.innerHTML = "Error al registrar el odontólogo.";
+        .then((response) => 
+        {
+            if (response.ok != true) {
+                alert("Alguno de los datos es incorrecto.")
             }
+            return response.json();
+        })
+        .then((data) => 
+        {
+            if (data.ok = true) {
+                mensaje.innerHTML = "El odontólogo " + data.nombre + " " + data.apellido + " se ha registrado exitosamente.";
+            } 
         })
         .catch((error) => {
             console.error("Error:", error);
