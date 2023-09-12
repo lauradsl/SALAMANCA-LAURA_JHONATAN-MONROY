@@ -93,9 +93,4 @@ public class Paciente
     public void setTurnos(List<Turno> turnos) {
         this.turnos = turnos;
     }
-
-    @Override
-    public String toString() {
-        return "Id: " + id + " - Nombre: " + nombre + " - Apellido: " + apellido + " - DNI: " + dni + " - Fechas de ingreso: " + fechaIngreso + " - Domicilio: " + domicilio;
-    }
 }

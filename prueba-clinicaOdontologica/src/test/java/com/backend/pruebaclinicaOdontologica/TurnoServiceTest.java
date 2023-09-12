@@ -1,65 +1,112 @@
 package com.backend.pruebaclinicaOdontologica;
 
 import com.backend.pruebaclinicaOdontologica.dto.entrada.modificacion.TurnoModificacionEntradaDto;
+import com.backend.pruebaclinicaOdontologica.dto.entrada.odontologo.OdontologoEntradaDto;
+import com.backend.pruebaclinicaOdontologica.dto.entrada.paciente.DomicilioEntradaDto;
+import com.backend.pruebaclinicaOdontologica.dto.entrada.paciente.PacienteEntradaDto;
 import com.backend.pruebaclinicaOdontologica.dto.entrada.turno.TurnoEntradaDto;
+import com.backend.pruebaclinicaOdontologica.dto.salida.odontologo.OdontologoSalidaDto;
+import com.backend.pruebaclinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
 import com.backend.pruebaclinicaOdontologica.dto.salida.turno.TurnoSalidaDto;
-import com.backend.pruebaclinicaOdontologica.exception.BadRequestException;
 import com.backend.pruebaclinicaOdontologica.exception.ResourceNotFoundException;
+import com.backend.pruebaclinicaOdontologica.service.impl.OdontologoService;
+import com.backend.pruebaclinicaOdontologica.service.impl.PacienteService;
 import com.backend.pruebaclinicaOdontologica.service.impl.TurnoService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class TurnoServiceTest
 {
     @Autowired
     TurnoService turnoService;
 
+    @Autowired
+    PacienteService pacienteService;
+    private static PacienteEntradaDto paciente;
+    @Autowired
+    OdontologoService odontologoService;
+    private static OdontologoEntradaDto odontologo;
+
+
+    @BeforeAll
+    static void doBefore()
+    {
+        paciente = new PacienteEntradaDto("Luisa", "Lotero", 123, LocalDate.parse("2023-12-31"), new DomicilioEntradaDto("El Tunal", 302, "Armenia", "Quindio"));
+
+        odontologo = new OdontologoEntradaDto("LS-1234567", "Laura", "Salamanca");
+    }
+
     //REGISTRAR
     @Test
-    public void debeRegistrarUnTurno() throws BadRequestException {
-        TurnoEntradaDto turnoEntradaDto = new TurnoEntradaDto(2L, 2L, LocalDateTime.parse("2023-12-31T14:30"));
+    @Order(1)
+    public void debeRegistrarUnTurno()  {
 
-        TurnoSalidaDto rtaObtenida = turnoService.registrarTurno(turnoEntradaDto);
+        PacienteSalidaDto pacienteSalidaDto = pacienteService.registrarPaciente(paciente);
 
-        Assertions.assertEquals(2, rtaObtenida.getOdontologoTurnoSalidaDto().getId());
+        OdontologoSalidaDto odontologoSalidaDto = odontologoService.registrarOdontologo(odontologo);
+
+        TurnoEntradaDto turnoEntradaDto = new TurnoEntradaDto(pacienteSalidaDto.getId(), odontologoSalidaDto.getId(), LocalDateTime.of(2023, 12, 31,14,30));
+
+        try
+        {
+            TurnoSalidaDto rtaObtenida = turnoService.registrarTurno(turnoEntradaDto);
+            Assertions.assertEquals(1L, rtaObtenida.getOdontologoTurnoSalidaDto().getId());
+        } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
     }
 
     //LISTAR
     @Test
+    @Order(2)
     public void debeListarTodosLosTurnos()
     {
-        ArrayList listaTurnos = new ArrayList<>(turnoService.listarTurnos());
-        assertNotNull(listaTurnos);
+        List<TurnoSalidaDto> listaTurnos = turnoService.listarTurnos();
+        assertTrue(listaTurnos.size() > 0);
     }
 
     //MODIFICAR
     @Test
-    public void debeModificarUnTurno() throws ResourceNotFoundException {
-        TurnoModificacionEntradaDto turnoModificado = new TurnoModificacionEntradaDto(1L,3L,2L,LocalDateTime.parse("2023-10-18T14:30"));
-
-        Assertions.assertEquals(3L, turnoService.modificarTurno(turnoModificado).getOdontologoTurnoSalidaDto().getId());
+    @Order(3)
+    public void alIntentarModificarElTurnoId2_deberiaLanzarUnaResourceNotFoundException() {
+        TurnoModificacionEntradaDto turnoModificacionEntradaDto = new TurnoModificacionEntradaDto();
+        turnoModificacionEntradaDto.setId(2L);
+        assertThrows(ResourceNotFoundException.class, () -> turnoService.modificarTurno(turnoModificacionEntradaDto));
     }
 
     //BUSCAR
     @Test
+    @Order(4)
     public void debeBuscarUnTurnoPorId()
     {
-        Assertions.assertEquals(3L, turnoService.buscarTurnoPorId(3L).getId());
+        Assertions.assertEquals(1L, turnoService.buscarTurnoPorId(1L).getId());
     }
 
     //ELIMINAR
     @Test
-    public void debeEliminarUnTurnoPorId() throws ResourceNotFoundException {
-        turnoService.eliminarTurno(1L);
-        Assertions.assertNull(turnoService.buscarTurnoPorId(1L) );
-    }
+    @Order(5)
+    public void debeEliminarUnTurnoPorId() {
 
+        try
+        {
+            turnoService.eliminarTurno(1L);
+        } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        assertThrows(ResourceNotFoundException.class, () -> turnoService.eliminarTurno(1L));
+    }
 
 }

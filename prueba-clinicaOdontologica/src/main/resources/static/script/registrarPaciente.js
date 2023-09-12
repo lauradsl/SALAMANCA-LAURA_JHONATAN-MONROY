@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((response) => response.json())
         .then((data) => {
             if (!data.ok) {
-                mensaje.innerHTML = "Paciente registrado exitosamente.";
+                mensaje.innerHTML = "El paciente " + data.nombre + " " + data.apellido + " se ha registrado exitosamente."
             } else {
                 mensaje.innerHTML = "Error al registrar el paciente.";
             }

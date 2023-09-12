@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const pacienteId = document.getElementById("pacienteId").value;
         const odontologoId = document.getElementById("odontologoId").value;
-        const fechaYHora = document.getElementById("fechaYHora").value
+        const fechaYHora = document.getElementById("fechaYHora").value;
         
 
         // Enviar los datos al backend (puedes usar Fetch API o Axios para esto)

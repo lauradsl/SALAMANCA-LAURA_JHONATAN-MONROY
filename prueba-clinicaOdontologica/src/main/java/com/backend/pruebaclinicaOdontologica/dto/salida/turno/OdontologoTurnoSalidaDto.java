@@ -35,4 +35,13 @@ public class OdontologoTurnoSalidaDto
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
+
+    @Override
+    public String toString() {
+        return "OdontologoTurnoSalidaDto{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                '}';
+    }
 }

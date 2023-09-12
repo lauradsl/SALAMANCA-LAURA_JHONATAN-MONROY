@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((response) => response.json())
         .then((data) => {
             if (!data.ok) {
-                mensaje.innerHTML = "Odontólogo registrado exitosamente.";
+                mensaje.innerHTML = "El odontólogo " + data.nombre + " " + data.apellido + " se ha registrado exitosamente.";
             } else {
                 mensaje.innerHTML = "Error al registrar el odontólogo.";
             }

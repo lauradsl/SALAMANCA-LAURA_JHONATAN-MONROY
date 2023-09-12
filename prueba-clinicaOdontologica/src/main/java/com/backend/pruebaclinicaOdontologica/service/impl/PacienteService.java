@@ -73,8 +73,7 @@ public class PacienteService implements IPacienteService
     }
 
     @Override
-    public PacienteSalidaDto modificarPaciente(PacienteModificacionEntradaDto pacienteModificado)
-    {
+    public PacienteSalidaDto modificarPaciente(PacienteModificacionEntradaDto pacienteModificado) throws ResourceNotFoundException {
         PacienteSalidaDto pacienteSalidaDto = null;
         if(buscarPacientePorId(pacienteModificado.getId()) != null)
         {
@@ -82,6 +81,7 @@ public class PacienteService implements IPacienteService
             LOGGER.info("El paciente {} fue modificado exitosamente ", pacienteModificado);
         } else {
             LOGGER.info("El paciente {} no fue encontrado", pacienteModificado);
+            throw new ResourceNotFoundException("No se ha logrado modificar el paciente con ID: " + pacienteModificado.getId());
         }
         return pacienteSalidaDto;
     }

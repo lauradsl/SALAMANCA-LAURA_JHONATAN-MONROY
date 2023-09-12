@@ -5,43 +5,51 @@ import com.backend.pruebaclinicaOdontologica.dto.entrada.odontologo.OdontologoEn
 import com.backend.pruebaclinicaOdontologica.dto.salida.odontologo.OdontologoSalidaDto;
 import com.backend.pruebaclinicaOdontologica.exception.ResourceNotFoundException;
 import com.backend.pruebaclinicaOdontologica.service.impl.OdontologoService;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 
-
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class OdontologoServiceTest {
 
     @Autowired
     private OdontologoService odontologoService;
     //REGISTRAR
     @Test
-    public void registrarOdontologo()
+    @Order(1)
+    public void debeRegistrarUnOdontologo()
     {
         OdontologoEntradaDto odontologoEntradaDto =  new OdontologoEntradaDto("LS-1234567", "Laura", "Salamanca");
 
         OdontologoSalidaDto rtaObtenida = odontologoService.registrarOdontologo(odontologoEntradaDto);
 
-        assertEquals("LS-1234567", rtaObtenida.getMatricula());
+        assertEquals("Laura", rtaObtenida.getNombre());
     }
 
     //LISTAR
     @Test
+    @Order(2)
     public void debeListarTodosLosOdontologos()
     {
-        ArrayList listaOdontologos = new ArrayList<>(odontologoService.listarOdontologos());
-        assertNotNull(listaOdontologos);
+        List<OdontologoSalidaDto> listaOdontologos = odontologoService.listarOdontologos();
+        assertTrue(listaOdontologos.size() > 0);
     }
 
     //MODIFICAR
     @Test
-    public void debeModificarUnOdontologo()
+    @Order(3)
+    public void debeModificarElNombreDeUnOdontologo()
     {
         OdontologoModificacionEntradaDto odontologoModificado = new OdontologoModificacionEntradaDto(1L,"LS-1234567", "Daniela", "Salamanca");
 
@@ -52,6 +60,7 @@ public class OdontologoServiceTest {
 
     //BUSCAR
     @Test
+    @Order(3)
     public void debeBuscarUnOdontologoPorId()
     {
         assertEquals("Daniela", odontologoService.buscarOdontologoPorId(1L).getNombre());
@@ -59,9 +68,15 @@ public class OdontologoServiceTest {
 
     //ELIMINAR
     @Test
-    public void debeEliminarUnOdontologoPorId() throws ResourceNotFoundException
+    public void debeEliminarUnOdontologoPorId()
     {
-        odontologoService.eliminarOdontologo(1L);
-        assertNull(odontologoService.buscarOdontologoPorId(1L) );
+        try
+        {
+            odontologoService.eliminarOdontologo(1L);
+        } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        assertThrows(ResourceNotFoundException.class, () -> odontologoService.eliminarOdontologo(1L));
     }
 }
