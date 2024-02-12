@@ -1,0 +1,368 @@
+{
+	"info": {
+		"_postman_id": "53cb841a-356e-4e7c-82a6-5d32c019acc0",
+		"name": "Clinica_Odontologica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26643448"
+	},
+	"item": [
+		{
+			"name": "Pacientes",
+			"item": [
+				{
+					"name": "registrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Ubeni\",\r\n    \"apellido\":\"Salamanca\",\r\n    \"dni\":123,\r\n    \"fechaIngreso\": \"2023-09-21\",\r\n    \"domicilio\":\r\n    {\r\n        \"id\":1,\r\n        \"calle\":\"una calle\",\r\n        \"numero\":123,\r\n        \"localidad\":\"Cordoba\",\r\n        \"provincia\":\"Cordoba\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pacientes/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pacientes",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listarPacientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/pacientes/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pacientes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscarPacientePorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/pacientes/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pacientes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificarPaciente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 3,\r\n  \"nombre\": \"Ubeni\",\r\n  \"apellido\": \"Salamanca\",\r\n  \"dni\": \"123\",\r\n  \"fechaIngreso\": \"2023-09-21\",\r\n  \"domicilio\": {\r\n    \"id\": 3,\r\n    \"calle\": \"una calle\",\r\n    \"numero\": 123,\r\n    \"localidad\": \"Cordoba\",\r\n    \"provincia\": \"Quindio\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pacientes/modificar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pacientes",
+								"modificar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminarPaciente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/pacientes/eliminar/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pacientes",
+								"eliminar",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Odontologo",
+			"item": [
+				{
+					"name": "registrarOdontologo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"matricula\":\"OD-7654321\",\r\n    \"nombre\":\"Ubeni\",\r\n    \"apellido\":\"Lotero\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/odontologos/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"odontologos",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listarOdontologos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/odontologos/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"odontologos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminarOdontologo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/odontologos/eliminar/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"odontologos",
+								"eliminar",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscarOdontologoPorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/odontologos/buscarPorId/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"odontologos",
+								"buscarPorId",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificarOdontologo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"matricula\": \"string\",\r\n  \"nombre\": \"string\",\r\n  \"apellido\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/odontologos/modificar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"odontologos",
+								"modificar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Turno",
+			"item": [
+				{
+					"name": "registrarTurno",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pacienteId\": 1,\r\n    \"odontologoId\": 1,\r\n    \"fechaYHora\": \"2023-09-30 14:30\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/turnos/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"turnos",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listarTurnos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/turnos/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"turnos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscarTurnoPorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/turnos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"turnos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificarTurno",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"odontologoId\": 0,\r\n  \"pacienteId\": 0,\r\n  \"fechaYHora\": \"2023-09-07T03:33:44.672Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/turnos/modificar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"turnos",
+								"modificar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminarTurno",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/turnos/eliminar/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"turnos",
+								"eliminar",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
